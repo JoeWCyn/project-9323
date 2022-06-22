@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import LoadingButton from '@mui/lab/LoadingButton';
 import Button from '@mui/material/Button';
+
 import TextField from '@mui/material/TextField';
 // import Dialog from '@mui/material/Dialog';
 // import DialogActions from '@mui/material/DialogActions';
@@ -11,10 +13,13 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 // import CloseIcon from '@mui/icons-material/Close';
 // import IconButton from '@mui/material/IconButton';
 import { signIn } from '../../service';
+
 import {
   FormHelperText,
 } from '@mui/material';
 const Signin = () => {
+  const [loading, setLoading] = React.useState(false);
+
   // const [open, setOpen] = React.useState(false);
 
   // const handleClickOpen = () => {
@@ -37,11 +42,15 @@ const Signin = () => {
       setErrorMessage('Please fill in all fields');
       return;
     }
+    setLoading(true)
     try {
       const response = await signIn({ email, password });
+
       localStorage.setItem('token', response.data.token);
     } catch (error) {
+      localStorage.setItem('sign-status', 'ok');
       setErrorMessage('Network Error');
+      window.location.reload(false);
     }
   };
   return (
@@ -77,7 +86,9 @@ const Signin = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
+          <LoadingButton
+                    loading={loading}
+                    loadingIndicator="Loading..."
             type="submit"
             fullWidth
             variant="contained"
@@ -85,7 +96,7 @@ const Signin = () => {
             onClick={handleSubmit}
           >
             Sign In
-          </Button>
+          </LoadingButton>
           {errorMessage && (
           <FormHelperText component="div" error={true}>
             {errorMessage}
