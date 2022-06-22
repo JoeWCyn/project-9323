@@ -40,7 +40,6 @@ const Window = () => {
       <div style={{ display: 'flex' }}>
         <DialogTitle>Come on in</DialogTitle>
         <IconButton className={`${styles.close} `} sx={{ marginLeft: '65%' }} aria-label="close" size="large" onClick={handleClose}>
-
           <CloseIcon />
         </IconButton>
       </div>
