@@ -1,0 +1,16 @@
+body {
+  margin: 0px;
+  overflow: auto;
+  height: 100%;
+}
+html {
+  height: 100%;
+  overflow: auto;
+}
+#root {
+  height: 100%;
+  overflow: auto;
+}
+
+/* PLEASE DON WRITE ANY CSS , import app.module.css instand
+ */
