@@ -121,6 +121,7 @@ export default function VerticalTabs() {
       </div>
       <Box
         sx={{
+          paddingTop: '5.3rem',
           flexGrow: 1,
           bgcolor: 'background.paper',
           display: 'flex',

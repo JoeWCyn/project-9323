@@ -2,6 +2,10 @@
   display: flex;
   box-shadow: 0 2px 4px rgb(0 0 0 / 25%);
   padding: 1rem;
+  z-index: 2;
+  background-color: #fff;
+  width: calc(100% - 3.2rem);
+  position: fixed;
 }
 .logo {
   margin-top: auto;

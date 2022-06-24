@@ -67,6 +67,7 @@ export default function ActionAreaCard({ data }) {
         borderColor: '#fff',
         borderTopColor: '#e6e5e6',
         mb: 1,
+
       }}
     >
       <CardContent>
