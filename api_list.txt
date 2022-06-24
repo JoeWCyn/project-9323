@@ -1,2 +1,52 @@
-Put sample API inside
+Put sample API inside:
+
+Admin Auth:
+1.
+Post: /admin/auth/register
+Body: {
+  "email": "chinesecarter@gmail.com",
+  "password": "12345",
+  "name": "Carter Cheng"
+}
+response: 
+	200 ok {
+   		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhheWRlbkB1bnN3LmVkdS5hdSIsImlhdCI6MTYwMzk0MzIzMH0.b37PfwlcH_cue6yhgvDt2IiNvhRACf79hTNtacYB94Q" 
+    		(This can be fake one, any unique number, can use UUID generator)
+	} or 
+	400 Bad Input{
+		"error": "Invalid input"
+	}
+
+2.
+Post: /admin/auth/login
+
+Body: {
+  "email": "chinesecarter@gmail.com",
+  "password": "12345",
+}
+response:
+	200 ok {
+   		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhheWRlbkB1bnN3LmVkdS5hdSIsImlhdCI6MTYwMzk0MzIzMH0.b37PfwlcH_cue6yhgvDt2IiNvhRACf79hTNtacYB94Q" 
+    		(This can be fake one, any unique number, can use UUID generator)
+	} or 
+	400 Bad Input {
+		"error": "Invalid input"
+	}
+
+
+3.
+Post: /admin/auth/logout
+
+Body: {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhheWRlbkB1bnN3LmVkdS5hdSIsImlhdCI6MTYwMzk0MzIzMH0.b37PfwlcH_cue6yhgvDt2IiNvhRACf79hTNtacYB94Q" 
+    (This can be fake one, any unique number, can use UUID generator)
+}
+
+response:
+	200 ok{}
+               	403 Forbidden {"error": "Invalid Token"}
+   
+The following detail list will be change base on frontend developing.
+
+
 

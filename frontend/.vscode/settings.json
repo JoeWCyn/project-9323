@@ -12,5 +12,10 @@
     "source.fixAll.eslint": true
   },
   "eslint.alwaysShowStatus": true,
-  "auto-close-tag.activationOnLanguage": ["*"]
+  "auto-close-tag.activationOnLanguage": [
+    "*"
+  ],
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
