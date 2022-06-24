@@ -12,9 +12,10 @@ import { MenuItem, Menu } from '@mui/material';
 import AnswerCard from './AnswerCard'
 const Home = () => {
   console.log(localStorage.getItem('sign-status'));
-  const sample = [{ id: '12' }, { id: '23' }, { id: '45' }]
+  const sample = [{ id: '12', type: 1 }, { id: '23', type: 2 }, { id: '45', type: 2 }]
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [follow, setFollow] = React.useState(true);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -58,8 +59,14 @@ const Home = () => {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut viverra tellus, sit amet sagittis libero. Integer nibh tortor, facilisis vel mollis dapibus, mattis ut nisl. Praesent convallis consequat eros, at interdum lorem lacinia eget. Praesent posuere leo nec tempor pretium. Quisque imperdiet semper ex, in maximus urna porttitor laoreet. Curabitur hendrerit est eget ante pulvinar tristique. Nullam vulputate, nulla vel posuere ullamcorper, mauris leo molestie tellus, a volutpat orci velit eu justo. Curabitur erat lectus, luctus non mauris ut, ultricies ornare diam. Praesent iaculis sapien nec blandit tempus. Praesent vitae gravida nisi. Donec consequat interdum elementum. Donec nec lacus mi. Fusce posuere cursus augue, sit amet vulputate eros dapibus ac. Nulla consequat massa massa, vel hendrerit nunc mattis ut. Morbi lobortis tristique tincidunt. Nulla facilisi'
                 }
               ></CardContent>
-        <CardActions sx={{ ml: 3, margin: 'auto', width: '90%' }}>
-          <Button size="small">Follow</Button>
+        <CardActions sx={{ ml: 3, margin: 'auto', width: '90%' }}>{follow ? <Button onClick={(e) => {
+          e.preventDefault()
+          setFollow(!follow)
+        }}size="small">Follow</Button> : <Button color="error" onClick={(e) => {
+          e.preventDefault()
+          setFollow(!follow)
+        }} size="small">Unfollow</Button>}
+
           <Box sx={{ margin: 'auto' }}>2022/02/31 19:49:03</Box>
           <Box sx={{ margin: 'auto' }}>{"author:'people1'"}</Box>
           <Box

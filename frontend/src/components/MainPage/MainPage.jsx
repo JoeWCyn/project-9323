@@ -11,6 +11,7 @@ import LoggedNarbar from '../LoggedNavBar/Navbar';
 import SearchResultCard from '../SearchResultCard/SearchResultCard';
 import SortIcon from '@mui/icons-material/Sort';
 import { MenuItem, Button, Menu } from '@mui/material';
+import GuideCard from '../GuideDetail/GuideCard'
 // eslint-disable-next-line space-before-function-paren
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -182,10 +183,11 @@ export default function VerticalTabs() {
             <Box sx={{ width: '50%', margin: 'auto' }}>
               {sampleData.map((e, i) => {
                 return (
-                  <SearchResultCard
+                  e.hourly
+                    ? <SearchResultCard
                     key={'resultCard' + i}
                     data={e}
-                  ></SearchResultCard>
+                  ></SearchResultCard> : <GuideCard></GuideCard>
                 );
               })}
             </Box>

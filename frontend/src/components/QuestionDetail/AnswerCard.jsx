@@ -8,13 +8,24 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 export default function RecipeReviewCard () {
+  const [thumbUp, setThumbUp] = React.useState(false);
+  const [thumbDown, setThumbDown] = React.useState(false);
+
+  const ThumbUp = (e) => {
+    if (thumbDown) { ThumbDown() }
+    setThumbUp(!thumbUp)
+  }
+  const ThumbDown = (e) => {
+    if (thumbUp) { ThumbUp() }
+    setThumbDown(!thumbDown)
+  }
   return (
-    <Card sx={{ width: '95%', margin: '16px', padding: '1rem', borderRadius: '1rem' }}>
+    <Card sx={{ width: '95%', margin: 'auto', marginBottom: '16px', padding: '1rem', borderRadius: '1rem' }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -70,9 +81,15 @@ export default function RecipeReviewCard () {
             Set aside off of the heat to let rest for 10 minutes, and then serve.
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <CardActions disableSpacing sx={{
+          width: 'max-content',
+          float: 'right'
+        }}>
+        <IconButton aria-label="Thumb up" onClick={ThumbUp} sx={{ color: thumbUp ? 'blue' : '' }}>
+          <ThumbUpIcon />
+        </IconButton>
+        <IconButton aria-label="Thumb down" onClick={ThumbDown} sx={{ color: thumbDown ? 'red' : '' }}>
+          <ThumbDownIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
