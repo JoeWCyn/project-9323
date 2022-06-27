@@ -1,13 +1,19 @@
 Put sample API inside:
 
-Admin Auth:
+Ping:
+curl --location --request GET '127.0.0.1:5000/ping'
+
+return "pong"
+
+Auth:
 1.
-Post: /auth/register
-Body: {
-  "email": "chinesecarter@gmail.com",
-  "password": "12345",
-  "name": "Carter Cheng"
-}
+curl --location --request POST '127.0.0.1:5000/auth/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "yyu1@unsw.edu.au",
+  "password": "123",
+  "name": "yyu"
+}'
 response: 
 	200 ok {
    		"token": "07d4911b-a784-49ed-a5b4-31e8609b5e41" 
@@ -17,12 +23,13 @@ response:
 	}
 
 2.
-Post: /auth/login
+curl --location --request POST '127.0.0.1:5000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "yyu1@unsw.edu.au",
+  "password": "123"
+}'
 
-Body: {
-  "email": "chinesecarter@gmail.com",
-  "password": "12345",
-}
 response:
 	200 ok {
    		"token": "07d4911b-a784-49ed-a5b4-31e8609b5e41"
@@ -33,12 +40,21 @@ response:
 
 
 3.
-Post: /auth/logout
+curl --location --request POST '127.0.0.1:5000/auth/logout'
 
 response:
 	200 ok {}
    
 The following detail list will be change base on frontend developing.
 
+4.
+curl --location --request GET '127.0.0.1:5000/auth/ping'
 
+return "pong"
+
+
+Newsfeed:
+1.
+curl --location --request GET '127.0.0.1:5000/newsfeed/ping'
+return "pong"
 
