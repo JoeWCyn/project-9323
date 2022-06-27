@@ -2,7 +2,7 @@ Put sample API inside:
 
 Admin Auth:
 1.
-Post: /admin/auth/register
+Post: /auth/register
 Body: {
   "email": "chinesecarter@gmail.com",
   "password": "12345",
@@ -10,15 +10,14 @@ Body: {
 }
 response: 
 	200 ok {
-   		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhheWRlbkB1bnN3LmVkdS5hdSIsImlhdCI6MTYwMzk0MzIzMH0.b37PfwlcH_cue6yhgvDt2IiNvhRACf79hTNtacYB94Q" 
-    		(This can be fake one, any unique number, can use UUID generator)
+   		"token": "07d4911b-a784-49ed-a5b4-31e8609b5e41" 
 	} or 
-	400 Bad Input{
-		"error": "Invalid input"
+	400 Email used{
+		"error": "This email has been registed, please login"
 	}
 
 2.
-Post: /admin/auth/login
+Post: /auth/login
 
 Body: {
   "email": "chinesecarter@gmail.com",
@@ -26,25 +25,18 @@ Body: {
 }
 response:
 	200 ok {
-   		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhheWRlbkB1bnN3LmVkdS5hdSIsImlhdCI6MTYwMzk0MzIzMH0.b37PfwlcH_cue6yhgvDt2IiNvhRACf79hTNtacYB94Q" 
-    		(This can be fake one, any unique number, can use UUID generator)
+   		"token": "07d4911b-a784-49ed-a5b4-31e8609b5e41"
 	} or 
 	400 Bad Input {
-		"error": "Invalid input"
+		"error": "Email and password don't match"
 	}
 
 
 3.
-Post: /admin/auth/logout
-
-Body: {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhheWRlbkB1bnN3LmVkdS5hdSIsImlhdCI6MTYwMzk0MzIzMH0.b37PfwlcH_cue6yhgvDt2IiNvhRACf79hTNtacYB94Q" 
-    (This can be fake one, any unique number, can use UUID generator)
-}
+Post: /auth/logout
 
 response:
-	200 ok{}
-               	403 Forbidden {"error": "Invalid Token"}
+	200 ok {}
    
 The following detail list will be change base on frontend developing.
 

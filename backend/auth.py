@@ -36,7 +36,7 @@ class AuthRegister(Resource):
         sql = "SELECT id from users where email = '{}'".format(email)
         rows = cur.execute(sql).fetchall()
         if len(rows) > 0:
-            return "This email has been registed, please login", 400
+            return {"error": "This email has been registed, please login"}, 400
 
         # generate token, currently is just uuid
         # uuid4 is a random UUID
@@ -47,7 +47,7 @@ class AuthRegister(Resource):
                     [None, name, email, password, token])
         con.commit()
 
-        return token, 200
+        return {"token": token}, 200
 
 
 @api.route('/auth/login')
@@ -64,19 +64,17 @@ class AuthRegister(Resource):
             email, password)
         rows = cur.execute(sql).fetchall()
         if len(rows) == 0:
-            return "Email and password don't match", 400
+            return {"error": "Email and password don't match"}, 400
 
         token = rows[0][0]
 
-        return token, 200
+        return {"token": token}, 200
 
 
 @api.route('/auth/logout')
 class AuthRegister(Resource):
     def post(self):
-        token = ""
-
-        return token, 200
+        return {}, 200
 
 
 @api.route('/ping')
