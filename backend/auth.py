@@ -71,6 +71,14 @@ class AuthRegister(Resource):
         return token, 200
 
 
+@api.route('/auth/logout')
+class AuthRegister(Resource):
+    def post(self):
+        token = ""
+
+        return token, 200
+
+
 @api.route('/ping')
 class AuthRegister(Resource):
     def get(self):
