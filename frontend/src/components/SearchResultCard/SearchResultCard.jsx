@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
+import { useNavigate } from 'react-router-dom';
 
 /* import Drawer from '@mui/material/Drawer';
 import Link from '@mui/material/Link';
@@ -17,6 +18,8 @@ ActionAreaCard.propTypes = {
 
 // eslint-disable-next-line space-before-function-paren
 export default function ActionAreaCard({ data }) {
+  const navigate = useNavigate();
+
   const [isShowMore, setIsShowMore] = React.useState(true);
   const toggleReadMore = () => {
     setIsShowMore(!isShowMore);
@@ -73,6 +76,10 @@ export default function ActionAreaCard({ data }) {
       <CardContent>
         <Box>
           <CardHeader
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/question');
+            }}
             sx={{
               cursor: 'pointer',
               '&:hover': {
@@ -110,6 +117,11 @@ export default function ActionAreaCard({ data }) {
         <Button size="small">Follow</Button>
         <Box sx={{ margin: 'auto' }}>2022/02/31 19:49:03</Box>
         <Box
+          onClick={(e) => {
+            e.preventDefault(
+            )
+            navigate('/question');
+          }}
           sx={{
             margin: 'auto',
             color: '#1976d2',

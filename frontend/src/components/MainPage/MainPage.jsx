@@ -194,7 +194,6 @@ export default function VerticalTabs() {
             <Box
               sx={{
                 width: '40%',
-
                 border: '1px solid red',
               }}
             ></Box>
