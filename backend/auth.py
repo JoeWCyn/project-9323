@@ -3,10 +3,11 @@ import sqlite3
 import uuid
 from flask import jsonify, make_response
 from config import *
+from flask_cors import CORS
 
 
 auth_page = Blueprint("auth", __name__)
-
+CORS(auth_page)
 
 @auth_page.route('/auth/register', methods=['POST'])
 def auth_register():

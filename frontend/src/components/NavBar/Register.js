@@ -11,30 +11,34 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 // import CloseIcon from '@mui/icons-material/Close';
 // import IconButton from '@mui/material/IconButton';
 import { register } from '../../service';
-import {
-  FormHelperText,
-} from '@mui/material';
+import CommonMessage from '../CommonMessage/CommonMessage'
+
 const Signin = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(['', 'error', false]);
+  function setMessageStatus () {
+    setErrorMessage(['', 'error', false])
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name | !email | !password | !confirmPassword) {
-      setErrorMessage('Please fill out all fields');
+      setErrorMessage(['Please fill in all fields', 'error', true]);
       return;
     }
     if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
+      setErrorMessage(['Passwords do not match', 'error', true]);
       return;
     }
     try {
       await register({ name, email, password });
+      setErrorMessage(['Register in success', 'success', true]);
+      window.location.reload(false);
     } catch (error) {
-      setErrorMessage('Network Error');
+      setErrorMessage([error.response.data.error, 'error', true]);
     }
   };
   return (
@@ -83,11 +87,12 @@ const Signin = () => {
           >
             Register
           </Button>
-          {errorMessage && (
-          <FormHelperText component="div" error={true}>
-            {errorMessage}
-          </FormHelperText>
-          )}
+          {<CommonMessage
+          setVisible={setMessageStatus}
+          message={errorMessage[0]}
+          severity={errorMessage[1]}
+          visible={errorMessage[2]}
+        ></CommonMessage>}
           <h2 style={ {
             textAlign: 'center',
             alignItems: 'center'

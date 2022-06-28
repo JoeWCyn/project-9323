@@ -24,7 +24,7 @@ const Home = () => {
   };
   return (
     <div className="home">
-      {localStorage.getItem('sign-status') ? (
+      {localStorage.getItem('token') ? (
         <LoggedNarbar></LoggedNarbar>
       ) : (
         <Navbar></Navbar>

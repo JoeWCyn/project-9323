@@ -14,6 +14,8 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { logOut } from '../../service';
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -196,7 +198,17 @@ const Navbar = () => {
             <HelpIcon></HelpIcon>
             Help
           </MenuItem>
-          <MenuItem sx={{ fontSize: '1.2rem' }} onClick={handleClose}>
+          <MenuItem sx={{ fontSize: '1.2rem' }} onClick={async (e) => {
+            e.preventDefault()
+            try {
+              await logOut({ });
+              localStorage.removeItem('token')
+              window.location.reload(false);
+            } catch (error) {
+              window.alert('Fail to logout, please check network')
+            }
+            handleClose()
+          }}>
             <LogoutIcon></LogoutIcon>
             Logout
           </MenuItem>

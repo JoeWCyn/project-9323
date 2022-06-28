@@ -13,13 +13,13 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 // import CloseIcon from '@mui/icons-material/Close';
 // import IconButton from '@mui/material/IconButton';
 import { signIn } from '../../service';
-
-import {
-  FormHelperText,
-} from '@mui/material';
+import CommonMessage from '../CommonMessage/CommonMessage'
 const Signin = () => {
   const [loading, setLoading] = React.useState(false);
-
+  const [errorMessage, setErrorMessage] = useState(['', 'error', false]);
+  function setMessageStatus () {
+    setErrorMessage(['', 'error', false])
+  }
   // const [open, setOpen] = React.useState(false);
 
   // const handleClickOpen = () => {
@@ -35,11 +35,10 @@ const Signin = () => {
   // const focus = true
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email | !password) {
-      setErrorMessage('Please fill in all fields');
+      setErrorMessage(['Please fill in all fields', 'error', true]);
       return;
     }
     setLoading(true)
@@ -47,10 +46,11 @@ const Signin = () => {
       const response = await signIn({ email, password });
 
       localStorage.setItem('token', response.data.token);
-    } catch (error) {
-      localStorage.setItem('sign-status', 'ok');
-      setErrorMessage('Network Error');
+      setErrorMessage(['Login in success', 'success', true]);
       window.location.reload(false);
+    } catch (error) {
+      setErrorMessage([error.response.data.error, 'error', true]);
+      setLoading(false)
     }
   };
   return (
@@ -97,11 +97,12 @@ const Signin = () => {
           >
             Sign In
           </LoadingButton>
-          {errorMessage && (
-          <FormHelperText component="div" error={true}>
-            {errorMessage}
-          </FormHelperText>
-          )}
+          {<CommonMessage
+          setVisible={setMessageStatus}
+          message={errorMessage[0]}
+          severity={errorMessage[1]}
+          visible={errorMessage[2]}
+        ></CommonMessage>}
           <h2 style={ {
             textAlign: 'center',
             alignItems: 'center'

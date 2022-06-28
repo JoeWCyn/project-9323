@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../NavBar/Navbar';
 
 import LoggedNarbar from '../LoggedNavBar/Navbar'
-import { fetchDashboard } from '../../service.js';
 
 const Home = () => {
-  const [data, setData] = useState('');
   console.log(localStorage.getItem('sign-status'));
 
-  React.useEffect(async (e) => {
+  /*   React.useEffect(async (e) => {
     try {
       const response = await fetchDashboard({ });
       console.log(response.data.message.page);
@@ -16,14 +14,13 @@ const Home = () => {
     } catch (error) {
       alert(error);
     }
-  }, []);
+  }, []); */
 
   return (
     <div className="home">
-      {localStorage.getItem('sign-status')
+      {localStorage.getItem('token')
         ? <LoggedNarbar></LoggedNarbar>
         : <Navbar></Navbar>}
-      <div>Get data from backend: {data}</div>
     </div>
   );
 }

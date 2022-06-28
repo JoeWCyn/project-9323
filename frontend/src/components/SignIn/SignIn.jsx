@@ -7,29 +7,32 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { signIn } from '../../service.js';
-
+import CommonMessage from '../CommonMessage/CommonMessage'
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const navigate = useNavigate();
-
+  const [errorMessage, setErrorMessage] = useState(['', 'error', false]);
+  function setMessageStatus () {
+    setErrorMessage(['', 'error', false])
+  }
+  /*   const navigate = useNavigate();
+ */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email | !password) {
       // TODO: show error
-      alert('Please fill in all fields');
+      setErrorMessage(['Please fill in all fields', 'error', true]);
       return;
     }
     try {
       const response = await signIn({ email, password });
       // TODO: set AUTH token
-      navigate('/');
+      setErrorMessage(['Login in success', 'success', true]);
       console.log(response);
     } catch (error) {
-      alert(error.response.data.error);
+      setErrorMessage([error.response.data.error, 'error', true]);
     }
   };
 
@@ -80,6 +83,12 @@ const SignIn = () => {
         >
           Sign In
         </Button>
+        {<CommonMessage
+          setVisible={setMessageStatus}
+          message={errorMessage[0]}
+          severity={errorMessage[1]}
+          visible={errorMessage[2]}
+        ></CommonMessage>}
         <Link to="/register" component={RouterLink}>
           {"Don't have an account? Register here"}
         </Link>
