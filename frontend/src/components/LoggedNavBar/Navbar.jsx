@@ -15,6 +15,7 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logOut } from '../../service';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -59,6 +60,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -135,7 +138,14 @@ const Navbar = () => {
           />
         </svg>
       </div>
-      <Search sx={{ display: 'flex', margin: 'auto', height: 'max-content' }}>
+      <Search sx={{
+        display: 'flex',
+        margin: 'auto',
+        height: 'max-content',
+        '@media screen and (max-width:1000px)': {
+          display: 'none'
+        }
+      }}>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
@@ -217,6 +227,10 @@ const Navbar = () => {
           variant="standard"
           className={`${styles.loginbutton} `}
           sx={{ fontSize: '18px' }}
+          onClick={(e) => {
+            e.preventDefault()
+            navigate('/newquestion')
+          }}
         >
           Ask question
         </Button>

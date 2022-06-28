@@ -4,7 +4,7 @@ import Navbar from '../NavBar/Navbar';
 import LoggedNarbar from '../LoggedNavBar/Navbar'
 
 const Home = () => {
-  console.log(localStorage.getItem('sign-status'));
+  console.log(localStorage.getItem('token'));
 
   /*   React.useEffect(async (e) => {
     try {
