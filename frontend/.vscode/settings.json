@@ -1,0 +1,21 @@
+{
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[jsx]": {
+    "editor.tabSize": 2
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.singleQuote": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "auto-close-tag.activationOnLanguage": [
+    "*"
+  ],
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
+}
