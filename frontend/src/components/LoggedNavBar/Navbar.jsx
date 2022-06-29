@@ -241,6 +241,10 @@ const Navbar = () => {
           variant="standard"
           className={`${styles.loginbutton} `}
           sx={{ fontSize: '18px' }}
+          onClick={(e) => {
+            e.preventDefault()
+            navigate('/newguide')
+          }}
         >
           Create Guide
         </Button>

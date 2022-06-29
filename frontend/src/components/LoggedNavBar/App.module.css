@@ -6,6 +6,7 @@
   background-color: #fff;
   width: calc(100% - 3.2rem);
   position: fixed;
+  max-height: 7rem;
 }
 .logo {
   margin-top: auto;

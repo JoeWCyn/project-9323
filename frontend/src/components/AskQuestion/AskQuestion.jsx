@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import Navbar from '../NavBar/Navbar';
 import LoggedNarbar from '../LoggedNavBar/Navbar';
 import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
+import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,6 +13,7 @@ const App = () => {
   const [content, setContent] = React.useState('')
   function handleChange (content, editor) {
     setContent({ content });
+    console.log(content)
   }
   React.useEffect(() => {
 
@@ -36,7 +37,7 @@ const App = () => {
 <form >
   <h2>Provide a question</h2>
 
-   <Input sx={{ mb: 2 }}placeholder="Input question here..." />
+   <TextField rows={4} multiline sx={{ mb: 2, width: '100%' }} placeholder="Input question here..." />
    <FormControl fullWidth>
   <InputLabel id="demo-simple-select-label">Field</InputLabel>
         <Select
@@ -44,7 +45,6 @@ const App = () => {
           value={field}
           label="Field"
           onChange={handleFieldChange}
-          margin='normal'
         >
           <MenuItem value={'Health'}>Health</MenuItem>
           <MenuItem value={'Science'}>Science</MenuItem>
