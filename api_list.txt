@@ -16,8 +16,9 @@ curl --location --request POST '127.0.0.1:5000/auth/register' \
 }'
 response: 
 	200 ok {
-   		"token": "07d4911b-a784-49ed-a5b4-31e8609b5e41" 
-	} or 
+    "token": "83b19d9c-728c-4415-b7b3-12a4bf58e8ec",
+    "user_id": 1
+} or 
 	400 Email used{
 		"error": "This email has been registed, please login"
 	}
@@ -32,8 +33,9 @@ curl --location --request POST '127.0.0.1:5000/auth/login' \
 
 response:
 	200 ok {
-   		"token": "07d4911b-a784-49ed-a5b4-31e8609b5e41"
-	} or 
+    "token": "83b19d9c-728c-4415-b7b3-12a4bf58e8ec",
+    "user_id": 1
+} or 
 	400 Bad Input {
 		"error": "Email and password don't match"
 	}
