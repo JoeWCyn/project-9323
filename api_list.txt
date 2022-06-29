@@ -55,6 +55,14 @@ curl --location --request GET '127.0.0.1:5000/auth/ping'
 return "pong"
 
 
+5. check authenticated decorator works
+curl --location --request GET '127.0.0.1:5000/auth/auth_ping' \
+--header 'token: 83b19d9c-728c-4415-b7b3-12a4bf58e8ec' \
+--header 'user_id: 1'
+
+return "pong"
+
+
 Newsfeed:
 1.
 curl --location --request GET '127.0.0.1:5000/newsfeed/ping'
