@@ -5,6 +5,7 @@ from auth import auth_page
 from newsfeed import newsfeed_page
 from question import question_page
 from comment import comment_page
+from article import article_page
 
 con = sqlite3.connect(DATABASE_NAME)
 cur = con.cursor()
@@ -56,6 +57,7 @@ app.register_blueprint(auth_page)
 app.register_blueprint(newsfeed_page)
 app.register_blueprint(question_page)
 app.register_blueprint(comment_page)
+app.register_blueprint(article_page)
 
 
 @app.route("/ping")

@@ -4,6 +4,7 @@ import uuid
 from flask import jsonify, make_response
 from config import *
 from flask_cors import CORS
+from helper import authenticated
 
 
 auth_page = Blueprint("auth", __name__)
@@ -34,7 +35,13 @@ def auth_register():
                 [None, name, email, password, token])
     con.commit()
 
-    return make_response(jsonify({"token": token})), 200
+    sql = "SELECT id, token from users where email = '{}' and password = '{}'".format(
+        email, password)
+    rows = cur.execute(sql).fetchall()
+    user_id = rows[0][0]
+    token = rows[0][1]
+
+    return make_response(jsonify({"token": token, "user_id": user_id})), 200
 
 
 @auth_page.route('/auth/login', methods=['POST'])
@@ -46,15 +53,16 @@ def auth_login():
     con = sqlite3.connect(DATABASE_NAME)
     cur = con.cursor()
 
-    sql = "SELECT token from users where email = '{}' and password = '{}'".format(
+    sql = "SELECT id, token from users where email = '{}' and password = '{}'".format(
         email, password)
     rows = cur.execute(sql).fetchall()
     if len(rows) == 0:
         return make_response(jsonify({"error": "Email and password don't match"})), 400
 
-    token = rows[0][0]
+    user_id = rows[0][0]
+    token = rows[0][1]
 
-    return make_response(jsonify({"token": token})), 200
+    return make_response(jsonify({"token": token, "user_id": user_id})), 200
 
 
 @auth_page.route('/auth/logout', methods=['POST'])
@@ -66,4 +74,9 @@ def auth_logout():
 
 @auth_page.route('/auth/ping', methods=['GET'])
 def auth_ping():
+    return "Pong", 200
+
+@auth_page.route('/auth/auth_ping', methods=['GET'])
+@authenticated
+def authenticated_ping():
     return "Pong", 200
