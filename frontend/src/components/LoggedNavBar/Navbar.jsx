@@ -183,7 +183,10 @@ const Navbar = () => {
         >
           <MenuItem
             sx={{ width: '10rem', fontSize: '1.2rem' }}
-            onClick={handleClose}
+            onClick={(e) => {
+              e.preventDefault()
+              navigate('/profile')
+            }}
           >
             <AccountBoxIcon></AccountBoxIcon>
             Profile
@@ -211,7 +214,7 @@ const Navbar = () => {
           <MenuItem sx={{ fontSize: '1.2rem' }} onClick={async (e) => {
             e.preventDefault()
             try {
-              await logOut({ });
+              await logOut({});
               localStorage.removeItem('token')
               window.location.reload(false);
             } catch (error) {
