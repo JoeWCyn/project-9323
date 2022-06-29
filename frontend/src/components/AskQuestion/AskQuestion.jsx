@@ -25,6 +25,7 @@ const App = () => {
   };
   return (
 <Box sx={{ display: 'flex' }}>
+
 {localStorage.getItem('token')
   ? (
           <LoggedNarbar></LoggedNarbar>
