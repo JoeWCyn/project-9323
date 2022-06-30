@@ -65,10 +65,9 @@ def article_page_create():
 
     cur.execute("insert into articles values (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)",
                 [id, article_id, step_number, title, content, image, time_created, time_modified, author, reploy_ids, thumbUpBy, is_deleted])
-    id = cur.lastrowid
     con.commit()
 
-    return make_response(jsonify({"article_id": id})), 200
+    return make_response(jsonify({"article_id": article_id})), 200
 
 
 # get all the title and pages information
