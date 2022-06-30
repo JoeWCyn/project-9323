@@ -2,6 +2,7 @@ from functools import wraps
 from flask import request, jsonify, make_response
 from config import *
 import sqlite3
+import time
 
 
 def authenticated(func):
@@ -34,3 +35,7 @@ def get_user_id_from_token(token):
         return None
     else:
         return str(rows[0][0])
+
+
+def get_unix_time():
+    return int(time.time())
