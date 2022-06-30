@@ -11,7 +11,7 @@ con = sqlite3.connect(DATABASE_NAME)
 cur = con.cursor()
 
 cur.execute(
-    "CREATE TABLE IF NOT EXISTS users (id integer primary key autoincrement, name text, email text, password text, token text)")
+    "CREATE TABLE IF NOT EXISTS users (id integer primary key autoincrement, name text, email text, password text, token text, expertArea text, scores integer, coins integer)")
 cur.execute(
     "CREATE TABLE IF NOT EXISTS questions ( \
         id integer primary key autoincrement, \
