@@ -6,12 +6,24 @@ import json
 
 article_page = Blueprint("article", __name__)
 
-# add the first title page, no image involved
-@article_page.route('/article/title', methods=['POST'])
-@authenticated
-def article_title_create():
-    data = request.get_json()
 
+@article_page.route('/article', methods=['POST'])
+@authenticated
+def article_create():
+    data = request.get_json()
+    title_page = data.get("0", None)
+    if not title_page:
+        return make_response(jsonify({"error": "missing title or content"})), 400
+    article_id = _article_title_create(title_page)
+
+    for i in range(1, len(data)):
+        content_page = data.get(str(i), None)
+        _article_page_create(content_page, article_id, i)
+
+    return make_response(jsonify({"article_id": article_id})), 200
+
+
+def _article_title_create(data):
     id = None
     article_id = None
     step_number = 0
@@ -25,9 +37,6 @@ def article_title_create():
     thumbUpBy = json.dumps(list())
     is_deleted = 0
 
-    if not title or not content:
-        return make_response(jsonify({"error": "missing title or content"})), 400
-
     con = sqlite3.connect(DATABASE_NAME)
     cur = con.cursor()
 
@@ -36,17 +45,14 @@ def article_title_create():
     id = cur.lastrowid
     con.commit()
 
-    return make_response(jsonify({"article_id": id})), 200
+    return id
 
-# add the title page, currently has not set up image
-@article_page.route('/article/page', methods=['POST'])
-@authenticated
-def article_page_create():
-    data = request.get_json()
+
+def _article_page_create(data, article_id, step_number):
 
     id = None
-    article_id = data.get('article_id', None)
-    step_number = data.get('step_number', None)
+    article_id = article_id
+    step_number = step_number
     title = None
     content = data.get('content', None)
     image = None
@@ -56,9 +62,6 @@ def article_page_create():
     reploy_ids = json.dumps(list())
     thumbUpBy = json.dumps(list())
     is_deleted = 0
-
-    if not article_id or not step_number or not content:
-        return make_response(jsonify({"error": "missing article_id, step_number or content"})), 400
 
     con = sqlite3.connect(DATABASE_NAME)
     cur = con.cursor()
