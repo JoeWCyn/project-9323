@@ -13,7 +13,6 @@ const App = () => {
   const [content, setContent] = React.useState('')
   function handleChange (content, editor) {
     setContent({ content });
-    console.log(content)
   }
   React.useEffect(() => {
 
@@ -40,7 +39,7 @@ const App = () => {
 
    <TextField rows={4} multiline sx={{ mb: 2, width: '100%' }} placeholder="Input question here..." />
    <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Field</InputLabel>
+  <InputLabel >Field</InputLabel>
         <Select
           id="demo-simple-select"
           value={field}

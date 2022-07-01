@@ -3,8 +3,10 @@ from config import *
 from helper import authenticated, get_unix_time
 import sqlite3
 import json
+from flask_cors import CORS
 
 article_page = Blueprint("article", __name__)
+CORS(article_page)
 
 
 @article_page.route('/article', methods=['POST'])
