@@ -68,3 +68,58 @@ Newsfeed:
 curl --location --request GET '127.0.0.1:5000/newsfeed/ping'
 return "pong"
 
+
+前端建议api list：
+127.0.0.1:5000/allquestion/<field>/<order by>/<position>
+for example, when position is 1, return 1-5 qustion/answer
+position is 6 return 6-10 question/answer
+
+
+
+
+127.0.0.1:5000/likeguide/<guideid>
+body{
+  user_id
+  token
+}
+like a guide
+
+127.0.0.1:5000/newquestion
+post a new question
+body{
+  description:''
+  title:''
+  user:''
+}
+
+127.0.0.1:5000/newguide
+post a new guide
+body{
+  title:''
+  description:''
+  steps:[
+    {photo:[],text:'',video:''},
+    {...},
+    {...}
+  ]
+  category:''
+}
+
+
+127.0.0.1:5000/followquestion/<questionid>
+follow a question
+body{
+  user_id
+  token
+}
+
+127.0.0.1:5000/likeanswer/<questionid>/<answerid>/<like or dislike>
+body{
+  user_id
+  token
+}
+
+
+
+127.0.0.1:5000/commentanswer/<questionid>/<answerid>
+body:{comment}
