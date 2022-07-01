@@ -69,6 +69,99 @@ curl --location --request GET '127.0.0.1:5000/newsfeed/ping'
 return "pong"
 
 
+
+
+Article:
+1.
+curl --location --request GET '127.0.0.1:5000/article/ping'
+return "pong"
+
+
+2. Add page 0 (the title page)
+curl --location --request POST '127.0.0.1:5000/article/title' \
+--header 'user_id: 1' \
+--header 'token: f542efdf-ba96-4d8b-88de-26b084ea28a1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "this is a title",
+    "content": "this is a content"
+    }'
+return 
+{
+    "article_id": 4
+}
+
+3. Add following page. (image part is under construction) step_number is the page number starting from 1
+curl --location --request POST '127.0.0.1:5000/article/page' \
+--header 'user_id: 1' \
+--header 'token: f542efdf-ba96-4d8b-88de-26b084ea28a1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "article_id": "1",
+    "content": "this is a content2",
+    "step_number": "2"
+}'
+
+return {
+    "article_id": 4
+}
+
+
+4. 
+curl --location --request GET '127.0.0.1:5000/article/1' \
+--header 'user_id: 1' \
+--header 'token: f542efdf-ba96-4d8b-88de-26b084ea28a1' \
+--header 'Content-Type: application/json' \
+
+return
+{
+    "article": {
+        "0": {
+            "article_id": null,
+            "author": 1,
+            "content": "this is a content in title page",
+            "id": 1,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": "[]",
+            "step_number": 0,
+            "thumbUpBy": "[]",
+            "time_created": 1656596812,
+            "time_modified": 1656596812,
+            "title": "this is a title in title page(step_number is 0)"
+        },
+        "1": {
+            "article_id": 1,
+            "author": 1,
+            "content": "this is a content1",
+            "id": 7,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": "[]",
+            "step_number": 1,
+            "thumbUpBy": "[]",
+            "time_created": 1656597070,
+            "time_modified": 1656597070,
+            "title": null
+        },
+        "2": {
+            "article_id": 1,
+            "author": 1,
+            "content": "this is a content2",
+            "id": 8,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": "[]",
+            "step_number": 2,
+            "thumbUpBy": "[]",
+            "time_created": 1656597343,
+            "time_modified": 1656597343,
+            "title": null
+        }
+    }
+}
+
+
 前端建议api list：
 127.0.0.1:5000/allquestion/<field>/<order by>/<position>
 for example, when position is 1, return 1-5 qustion/answer
@@ -123,3 +216,4 @@ body{
 
 127.0.0.1:5000/commentanswer/<questionid>/<answerid>
 body:{comment}
+=======

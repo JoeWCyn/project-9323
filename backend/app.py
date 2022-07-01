@@ -11,7 +11,7 @@ con = sqlite3.connect(DATABASE_NAME)
 cur = con.cursor()
 
 cur.execute(
-    "CREATE TABLE IF NOT EXISTS users (id integer primary key autoincrement, name text, email text, password text, token text)")
+    "CREATE TABLE IF NOT EXISTS users (id integer primary key autoincrement, name text, email text, password text, token text, expertArea text, scores integer, coins integer)")
 cur.execute(
     "CREATE TABLE IF NOT EXISTS questions ( \
         id integer primary key autoincrement, \
@@ -20,14 +20,14 @@ cur.execute(
         timeCreated numeric, \
         timeUpdated numeric, \
         author numeric, \
-        replyIds blob, \
-        followers blob, \
+        replyIds text, \
+        thumbUpBy text, \
         isDeleted NOT NULL DEFAULT '0') \
         ")
 cur.execute(
     "CREATE TABLE IF NOT EXISTS articles ( \
         id integer primary key autoincrement, \
-        articleIds blob, \
+        articleId numeric, \
         stepNumber numeric, \
         title text, \
         content text, \
@@ -35,8 +35,8 @@ cur.execute(
         timeCreated numeric, \
         timeUpdated numeric, \
         author numeric, \
-        replyIds blob, \
-        followers blob, \
+        replyIds text, \
+        thumbUpBy text, \
         isDeleted NOT NULL DEFAULT '0') \
         ")
 cur.execute(
@@ -48,7 +48,7 @@ cur.execute(
         timeCreated numeric, \
         timeUpdated numeric, \
         author numeric, \
-        thumbUpBy blob, \
+        thumbUpBy text, \
         isDeleted NOT NULL DEFAULT '0') \
         ")
 
