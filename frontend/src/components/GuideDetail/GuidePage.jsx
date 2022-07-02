@@ -24,8 +24,11 @@ export default function VerticalTabs() {
   const { number } = useParams();
   const [data, setData] = React.useState({ 0: { title: 'none' }, 1: { title: 'none' } })
   const [activeStep, setActiveStep] = React.useState(0);
+  const temp = document.createElement('div');
+
   const handleStep = (step) => () => {
     setActiveStep(step);
+    temp.innerHTML = data[step].content;
   };
   React.useEffect(async () => {
     console.log(number, localStorage.getItem('user_id'), localStorage.getItem('token'))
@@ -63,7 +66,7 @@ export default function VerticalTabs() {
           {Object.keys(data).map((ele, index) => (
             <Step key={`label${index}`} >
               <StepButton color="inherit" onClick={handleStep(index)}>
-                {data[ele].title ? data[ele].title : 'unknown'}
+                {data[ele].step_title ? data[ele].step_title : 'unknown'}
               </StepButton>
             </Step>
           ))}
@@ -74,29 +77,13 @@ export default function VerticalTabs() {
 
           <CardMedia
             component="img"
-            height="194"
-            image="/static/images/cards/paella.jpg"
+            sx={{ height: 'max-content', width: 'max-content' }}
+            image="https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e"
             alt="Paella dish"
           />
           <CardContent>
             <Typography variant="h4" color="text.secondary">
-              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.
+            <div dangerouslySetInnerHTML={{ __html: data[activeStep].content }}></div>
             </Typography>
           </CardContent>
 
