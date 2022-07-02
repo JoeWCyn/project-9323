@@ -29,6 +29,7 @@ def _article_title_create(data):
     id = None
     article_id = None
     step_number = 0
+    step_title = data.get('step_title', None)
     title = data.get('title', None)
     content = data.get('content', None)
     image = None
@@ -42,8 +43,8 @@ def _article_title_create(data):
     con = sqlite3.connect(DATABASE_NAME)
     cur = con.cursor()
 
-    cur.execute("insert into articles values (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)",
-                [id, article_id, step_number, title, content, image, time_created, time_modified, author, reploy_ids, thumbUpBy, is_deleted])
+    cur.execute("insert into articles values (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)",
+                [id, article_id, step_number, step_title, title, content, image, time_created, time_modified, author, reploy_ids, thumbUpBy, is_deleted])
     id = cur.lastrowid
     con.commit()
 
@@ -55,6 +56,7 @@ def _article_page_create(data, article_id, step_number):
     id = None
     article_id = article_id
     step_number = step_number
+    step_title = data.get('step_title', None)
     title = None
     content = data.get('content', None)
     image = None
@@ -68,8 +70,8 @@ def _article_page_create(data, article_id, step_number):
     con = sqlite3.connect(DATABASE_NAME)
     cur = con.cursor()
 
-    cur.execute("insert into articles values (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)",
-                [id, article_id, step_number, title, content, image, time_created, time_modified, author, reploy_ids, thumbUpBy, is_deleted])
+    cur.execute("insert into articles values (?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)",
+                [id, article_id, step_number, step_title, title, content, image, time_created, time_modified, author, reploy_ids, thumbUpBy, is_deleted])
     con.commit()
 
     return make_response(jsonify({"article_id": article_id})), 200
@@ -103,15 +105,16 @@ def _read_artical_row(row):
         "id": row[0],
         "article_id": row[1],
         "step_number": row[2],
-        "title": row[3],
-        "content": row[4],
-        "image": row[5],
-        "time_created": row[6],
-        "time_modified": row[7],
-        "author": row[8],
-        "reploy_ids": row[9],
-        "thumbUpBy": row[10],
-        "is_deleted": row[11],
+        "step_title": row[3],
+        "title": row[4],
+        "content": row[5],
+        "image": row[6],
+        "time_created": row[7],
+        "time_modified": row[8],
+        "author": row[9],
+        "reploy_ids": row[10],
+        "thumbUpBy": row[11],
+        "is_deleted": row[12],
     }
     return ret
 

@@ -29,6 +29,7 @@ cur.execute(
         id integer primary key autoincrement, \
         articleId numeric, \
         stepNumber numeric, \
+        stepTitle text, \
         title text, \
         content text, \
         image text, \
