@@ -90,7 +90,7 @@ const App = () => {
         if (!(localStorage.getItem('token'))) { window.alert('Please log in first') } else {
           try {
             const response = await newGuide(Object.assign({}, steps), localStorage.getItem('token'), localStorage.getItem('user_id'))
-            navigate(`/${response.data.article_id}`)
+            navigate(`/guide/${response.data.article_id}`)
           } catch (error) {
             setErrorMessage([error, 'error', true])
           }

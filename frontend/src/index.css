@@ -10,6 +10,7 @@ html {
 #root {
   height: 100%;
   overflow: auto;
+  background-color: rgba(0,0,0,0.05);
 }
 
 /* PLEASE DON WRITE ANY CSS , import app.module.css instand
