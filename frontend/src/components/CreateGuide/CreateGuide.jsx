@@ -16,11 +16,10 @@ import CommonMessage from '../CommonMessage/CommonMessage'
 import { useNavigate } from 'react-router-dom';
 
 const App = () => {
-  const [steps, setStep] = React.useState([{ title: 'Step1', content: '', finished: false }, { title: 'Step2', content: '', finished: false }, { title: 'Step3', content: '', finished: false }]);
+  const [steps, setStep] = React.useState([{ step_title: 'Step1', content: '', finished: false }, { step_title: 'Step2', content: '', finished: false }, { step_title: 'Step3', content: '', finished: false }]);
   const [activeStep, setActiveStep] = React.useState(0);
   const [errorMessage, setErrorMessage] = React.useState(['', 'error', false]);
   const [content, setContent] = React.useState('')
-
   function setMessageStatus () {
     setErrorMessage(['', 'error', false])
   }
@@ -47,7 +46,7 @@ const App = () => {
       isLastStep()
         ? activeStep
         : activeStep + 1;
-    document.getElementById('guide_title').value = steps[newActiveStep].title
+    document.getElementById('step_title').value = steps[newActiveStep].step_title
     if (steps[newActiveStep].content) { setContent(steps[newActiveStep].content) } else { console.log('ssdd'); setContent('') }
     setContent('')
     console.log(content)
@@ -55,13 +54,13 @@ const App = () => {
     setActiveStep(newActiveStep);
   };
   const handleBack = () => {
-    document.getElementById('guide_title').value = steps[activeStep - 1].title
+    document.getElementById('step_title').value = steps[activeStep - 1].step_title
     setContent(steps[activeStep - 1].content ? steps[activeStep - 1].content : '')
 
     setActiveStep(activeStep - 1);
   }
   const handleNew = () => {
-    const list = [...steps.slice(0, activeStep + 1), { title: 'new step', content: '', finished: false }, ...steps.slice(activeStep + 1)]
+    const list = [...steps.slice(0, activeStep + 1), { step_title: 'new step', content: '', finished: false }, ...steps.slice(activeStep + 1)]
     setStep(list)
   };
   const handleStep = (step) => () => {
@@ -83,10 +82,11 @@ const App = () => {
   }
   const handleComplete = async () => {
     const newSteps = steps;
-    if (!content) { setErrorMessage(['Please fill in all fields', 'error', true]) } else {
-      newSteps[activeStep] = { title: document.getElementById('guide_title').value, content: content, finished: true };
+    if (!content || !document.getElementById('guide_title').value) { setErrorMessage(['Please fill in all fields', 'error', true]) } else {
+      newSteps[activeStep] = { step_title: document.getElementById('step_title').value, content: content, finished: true };
       setStep(newSteps)
       if (allStepsCompleted()) {
+        Object.keys(steps).forEach((ele) => { steps[ele].title = document.getElementById('guide_title').value })
         if (!(localStorage.getItem('token'))) { window.alert('Please log in first') } else {
           try {
             const response = await newGuide(Object.assign({}, steps), localStorage.getItem('token'), localStorage.getItem('user_id'))
@@ -112,11 +112,13 @@ const App = () => {
           <Navbar></Navbar>
     )}
 <Box sx={{ width: '70%', margin: 'auto', mt: 25 }}>
+      <h4 className={styles.guideh4}>Guide Title</h4>
+      <TextField rows={1} id='guide_title'multiline sx={{ mb: 2, width: '100%' }} />
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={`label${index}`} completed={steps[index].finished}>
             <StepButton color="inherit" onClick={handleStep(index)}>
-              {label.title}
+              {label.step_title}
             </StepButton>
           </Step>
         ))}
@@ -126,27 +128,29 @@ const App = () => {
             <Box>
             <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
             <h4 className={styles.guideh4}>Step Title</h4>
-            <TextField rows={1} id='guide_title'multiline sx={{ mb: 2, width: '100%' }} defaultValue={steps[activeStep].title} />
-            <Box sx={{ display: 'flex', width: '20rem' }}>
-            <h4 className={styles.guideh4}>{'Upload Photo(optional)'}</h4>
-            <label htmlFor="contained-button-file" style={{ margin: 'auto' }}>
-              <Input accept="image/*" id="contained-button-file" multiple type="file" />
-              <Button variant="contained" component="span">
-                Upload
-              </Button>
-            </label>
-            </Box>
-            <Box>
-            <h4 >{'Upload Video(optional)'}</h4>
-            <label htmlFor="contained-button-file" style={{ margin: 'auto' }}>
-              <Input accept="image/*" id="contained-button-file" multiple type="file" />
-              <Box>
-              <Button variant="contained" component="span">
-                Upload
-              </Button>
-              <TextField rows={1} multiline sx={{ mb: 1, mt: 2, width: '100%' }} placeholder="Or input youtube video here..." />
+            <TextField rows={1} id='step_title'multiline sx={{ mb: 2, width: '100%' }} defaultValue={steps[activeStep].step_title} />
+            <Box sx={{ display: 'flex' }}>
+              <Box sx={{ display: 'block', width: '20rem' }}>
+              <h4 className={styles.guideh4}>{'Upload Photo(optional)'}</h4>
+              <label htmlFor="contained-button-file" style={{ margin: 'auto' }}>
+                <Input accept="image/*" id="contained-button-file" multiple type="file" />
+                <Button variant="contained" component="span">
+                  Upload
+                </Button>
+              </label>
               </Box>
-            </label>
+              <Box sx={{ display: 'flex' }}>
+              <h4 className={styles.guideh4} style={{ marginRight: '5rem' }}>{'Upload Video(optional)'}</h4>
+              <label htmlFor="contained-button-file" style={{ margin: 'auto' }}>
+                <Input accept="image/*" id="contained-button-file" multiple type="file" />
+                <Box>
+                <Button variant="contained" component="span">
+                  Upload
+                </Button>
+                <TextField rows={1} multiline sx={{ mb: 1, mt: 2, width: '100%' }} placeholder="Or input youtube video here..." />
+                </Box>
+              </label>
+              </Box>
             </Box>
             <h4 className={styles.guideh4}>Description</h4>
             <Editor
