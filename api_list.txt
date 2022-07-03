@@ -278,6 +278,23 @@ curl --location --request PATCH '127.0.0.1:5000/article/1/un_thumb_up' \
     }
 }
 
+6. Delete a article
+curl --location --request DELETE '127.0.0.1:5000/article/7' \
+--header 'user_id: 1' \
+--header 'token: bc7dfcd7-282e-419f-9809-18dec22bfa30'
+
+{
+    "article_id": 7
+}
+
+curl --location --request GET '127.0.0.1:5000/article/7' \
+--header 'user_id: 1' \
+--header 'token: bc7dfcd7-282e-419f-9809-18dec22bfa30'
+
+{
+    "error": "No such article with article_id = 7"
+}
+
 前端建议api list：
 127.0.0.1:5000/allquestion/<field>/<order by>/<position>
 for example, when position is 1, return 1-5 qustion/answer

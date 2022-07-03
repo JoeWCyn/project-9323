@@ -88,6 +88,8 @@ def article_get_by_id(article_id):
     sql = "SELECT * from articles where id = '{}' and isDeleted != '1'".format(
         article_id)
     rows = cur.execute(sql).fetchall()
+    if len(rows) == 0:
+       return make_response(jsonify({"error": "No such article with article_id = {}".format(article_id)})), 400 
     ret[0] = _read_artical_row(rows[0])
 
     sql = "SELECT * from articles where articleId = '{}' and isDeleted != '1'".format(
@@ -98,6 +100,22 @@ def article_get_by_id(article_id):
         ret[row[2]] = _read_artical_row(row)
 
     return make_response(jsonify({"article": ret})), 200
+
+
+# delete all the title and pages information
+@article_page.route('/article/<int:article_id>', methods=['DELETE'])
+@authenticated
+def article_delete_by_id(article_id):
+    con = sqlite3.connect(DATABASE_NAME)
+    cur = con.cursor()
+
+    sql = "UPDATE articles SET isDeleted = '1' where id = '{}' or articleId = '{}'".format(
+        article_id, article_id)
+
+    cur.execute(sql)
+    con.commit()
+
+    return make_response(jsonify({"article_id": article_id})), 200
 
 
 def _read_artical_row(row):
@@ -150,7 +168,7 @@ def article_thumb_up_patch(article_id):
     return article_get_by_id(article_id)
 
 
-# add user_id into the thumbup list if not existed
+# delete user_id from the thumbup list if existed
 @article_page.route('/article/<int:article_id>/un_thumb_up', methods=['PATCH'])
 @authenticated
 def article_un_thumb_up_patch(article_id):
