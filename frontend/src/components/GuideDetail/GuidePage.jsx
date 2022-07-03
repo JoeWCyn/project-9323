@@ -19,6 +19,8 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import Button from '@mui/material/Button';
+
 // eslint-disable-next-line space-before-function-paren
 export default function VerticalTabs() {
   const { number } = useParams();
@@ -41,7 +43,7 @@ export default function VerticalTabs() {
   }, [])
   console.log(data)
   return (
-  <div className="home" style={{ display: 'flex' }}>
+  <div className="home">
   {localStorage.getItem('token')
     ? (
     <LoggedNarbar></LoggedNarbar>
@@ -49,7 +51,9 @@ export default function VerticalTabs() {
     : (
     <Navbar></Navbar>
       )}
-
+      <Box>
+        <Button sx={{ height: 'max-content', textDecoration: 'underline', fontSize: '1.3rem', color: '#1976d2 !important', ml: 2 }}href="/main">{'<Return'}</Button>
+        </Box>
       <Box className={styles.guideDetail}>
       <CardHeader
             sx={{ width: '90%', margin: 'auto', mt: 3 }}

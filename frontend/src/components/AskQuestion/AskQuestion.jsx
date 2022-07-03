@@ -23,7 +23,7 @@ const App = () => {
     setField(event.target.value);
   };
   return (
-<Box sx={{ display: 'flex' }}>
+<Box >
 
 {localStorage.getItem('token')
   ? (
@@ -32,8 +32,10 @@ const App = () => {
   : (
           <Navbar></Navbar>
     )}
-<Box sx={{ display: 'flex', mt: 18, width: '100%' }}>
-  <Box sx={{ width: '45%', margin: 'auto' }}>
+<Box sx={{ display: 'flex', mt: 3, width: '100%' }}>
+<Button sx={{ height: 'max-content', textDecoration: 'underline', fontSize: '1.3rem', color: '#1976d2 !important', ml: 2 }}href="/main">{'<Return'}</Button>
+
+  <Box sx={{ width: '75%', margin: 'auto' }}>
 <form >
   <h2>Provide a question</h2>
 
@@ -57,7 +59,7 @@ const App = () => {
     apiKey="yhf0swre6kb5yv1owq7bcxmfxaxwundoc1htcq2tpvhkyz8t"
     value={content.innerText}
     init={{
-      height: 500,
+      height: 300,
       menubar: false
     }}
     onEditorChange={handleChange}
@@ -67,8 +69,8 @@ const App = () => {
 
 </form>
 </Box>
-<Box sx={{ width: '35%', margin: 'auto', height: '100%', border: '1px solid red' }}></Box>
-</Box>
+{/* <Box sx={{ width: '35%', margin: 'auto', height: '100%', border: '1px solid red' }}></Box>
+ */}</Box>
 </Box>
   );
 };

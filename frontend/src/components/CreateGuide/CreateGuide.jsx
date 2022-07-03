@@ -92,7 +92,7 @@ const App = () => {
             const response = await newGuide(Object.assign({}, steps), localStorage.getItem('token'), localStorage.getItem('user_id'))
             navigate(`/guide/${response.data.article_id}`)
           } catch (error) {
-            setErrorMessage([error, 'error', true])
+            setErrorMessage(['network error', 'error', true])
           }
         }
       }
@@ -103,7 +103,7 @@ const App = () => {
     display: 'none',
   });
   return (
-<Box sx={{ display: 'flex' }}>
+<Box >
 {localStorage.getItem('token')
   ? (
           <LoggedNarbar></LoggedNarbar>
@@ -111,7 +111,10 @@ const App = () => {
   : (
           <Navbar></Navbar>
     )}
-<Box sx={{ width: '70%', margin: 'auto', mt: 25 }}>
+<Button sx={{ height: 'max-content', mt: 2, textDecoration: 'underline', fontSize: '1.3rem', color: '#1976d2 !important', ml: 2 }}href="javascript:history.back()">{'<Return'}</Button>
+
+<Box sx={{ width: '70%', margin: 'auto', mt: 1 }}>
+
       <h4 className={styles.guideh4}>Guide Title</h4>
       <TextField rows={1} id='guide_title'multiline sx={{ mb: 2, width: '100%' }} />
       <Stepper nonLinear activeStep={activeStep}>

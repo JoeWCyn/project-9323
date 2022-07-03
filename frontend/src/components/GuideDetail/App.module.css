@@ -1,12 +1,11 @@
 .guideDetail {
   width:80%;
-  margin-top: 10rem;
   height: 45rem;
   background: white;
   margin-left: auto;
   margin-right: auto;
-  display: inline-block;
   border-radius: 1rem;
+  margin-top: -2rem;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
 

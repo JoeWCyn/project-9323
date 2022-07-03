@@ -33,9 +33,11 @@ const Home = () => {
         sx={{
           backgroundColor: 'rgb(118, 118, 118, 0.1)',
           display: 'flex',
-          paddingTop: '6.3rem'
+          paddingTop: '1.3rem'
         }}
       >
+        <Button sx={{ height: 'max-content', textDecoration: 'underline', fontSize: '1.3rem', color: '#1976d2 !important', ml: 2 }}href="javascript:history.back()">{'<Return'}</Button>
+
         <Box sx={{
           marginLeft: ' auto',
           marginRight: ' auto',
