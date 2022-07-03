@@ -10,7 +10,7 @@ def authenticated(func):
     def wrap(*args, **kwargs):
         if request.headers.has_key('token') and request.headers.has_key('user_id'):
             auth_token = request.headers['token']
-            user_id = request.headers['user_id']
+            user_id = get_user_id_from_header()
 
             id = get_user_id_from_token(auth_token)
             if not id or id != user_id:
@@ -34,7 +34,11 @@ def get_user_id_from_token(token):
     if len(rows) == 0:
         return None
     else:
-        return str(rows[0][0])
+        return rows[0][0]
+
+
+def get_user_id_from_header():
+    return int(request.headers['user_id'])
 
 
 def get_unix_time():

@@ -158,6 +158,125 @@ return
     }
 }
 
+4. thumbup 
+curl --location --request PATCH '127.0.0.1:5000/article/1/thumb_up' \
+--header 'user_id: 1' \
+--header 'token: bc7dfcd7-282e-419f-9809-18dec22bfa30'
+
+curl --location --request PATCH '127.0.0.1:5000/article/1/thumb_up' \
+--header 'user_id: 2' \
+--header 'token: 8bec917f-f10d-460d-a7ba-ba6de50f3577'
+
+return 
+{
+    "article": {
+        "0": {
+            "article_id": null,
+            "author": 1,
+            "content": "this is a content in page 0",
+            "id": 1,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": [],
+            "step_number": 0,
+            "step_title": "this is step_title0",
+            "thumb_up_by": [
+                1,
+                2
+            ],
+            "time_created": 1656818607,
+            "time_modified": 1656818607,
+            "title": "this is a title"
+        },
+        "1": {
+            "article_id": 1,
+            "author": 1,
+            "content": "this is a content in page 1",
+            "id": 2,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": [],
+            "step_number": 1,
+            "step_title": "this is step_title1",
+            "thumb_up_by": [],
+            "time_created": 1656818607,
+            "time_modified": 1656818607,
+            "title": null
+        },
+        "2": {
+            "article_id": 1,
+            "author": 1,
+            "content": "this is a content in page2",
+            "id": 3,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": [],
+            "step_number": 2,
+            "step_title": "this is step_title2",
+            "thumb_up_by": [],
+            "time_created": 1656818607,
+            "time_modified": 1656818607,
+            "title": null
+        }
+    }
+}
+
+5. un_thumb_up
+curl --location --request PATCH '127.0.0.1:5000/article/1/un_thumb_up' \
+--header 'user_id: 1' \
+--header 'token: bc7dfcd7-282e-419f-9809-18dec22bfa30'
+
+{
+    "article": {
+        "0": {
+            "article_id": null,
+            "author": 1,
+            "content": "this is a content in page 0",
+            "id": 1,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": [],
+            "step_number": 0,
+            "step_title": "this is step_title0",
+            "thumb_up_by": [
+                2
+            ],
+            "time_created": 1656818607,
+            "time_modified": 1656818607,
+            "title": "this is a title"
+        },
+        "1": {
+            "article_id": 1,
+            "author": 1,
+            "content": "this is a content in page 1",
+            "id": 2,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": [],
+            "step_number": 1,
+            "step_title": "this is step_title1",
+            "thumb_up_by": [],
+            "time_created": 1656818607,
+            "time_modified": 1656818607,
+            "title": null
+        },
+        "2": {
+            "article_id": 1,
+            "author": 1,
+            "content": "this is a content in page2",
+            "id": 3,
+            "image": null,
+            "is_deleted": 0,
+            "reploy_ids": [],
+            "step_number": 2,
+            "step_title": "this is step_title2",
+            "thumb_up_by": [],
+            "time_created": 1656818607,
+            "time_modified": 1656818607,
+            "title": null
+        }
+    }
+}
 
 前端建议api list：
 127.0.0.1:5000/allquestion/<field>/<order by>/<position>
