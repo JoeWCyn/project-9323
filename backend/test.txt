@@ -1,207 +1,86 @@
-Question:
-1.
-curl --location --request GET '127.0.0.1:5000/question/ping'
-return "pong"
+  1  register:
 
-2.  create a question. Currently the image function is under construction
-curl --location --request POST '127.0.0.1:5000/question' \
---header 'user_id: 1' \
---header 'token: 421803eb-edb2-41be-8a7f-addc634c8505' \
+curl --location --request POST '127.0.0.1:5000/auth/register' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "0": {
-        "title": "this is a title",
-        "step_title": "this is step_title0",
-        "content": "this is a content in page 0"
-    },
-    "1": {
-        "step_title": "this is step_title1",
-        "content": "this is a content in page 1"
-    },
-    "2": {
-        "step_title": "this is step_title2",
-        "content": "this is a content in page2"
-    }
+  "email": "1234567890@gmail.com",
+  "password": "123",
+  "name": "joe"
 }'
-
-return 
-{
-    "question_id": 1
-}
-
-3. 
-curl --location --request GET '127.0.0.1:5000/question/1' \
---header 'user_id: 1' \
---header 'token: 421803eb-edb2-41be-8a7f-addc634c8505'
 
 return
 {
-    "question": {
-        "0": {
-            "question_id": null,
-            "author": 1,
-            "content": "this is a content in page 0",
-            "id": 1,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": "[]",
-            "step_number": 0,
-            "step_title": "this is step_title0",
-            "thumbUpBy": "[]",
-            "time_created": 1656757217,
-            "time_modified": 1656757217,
-            "title": "this is a title"
-        },
-        "1": {
-            "question_id": 1,
-            "author": 1,
-            "content": "this is a content in page 1",
-            "id": 2,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": "[]",
-            "step_number": 1,
-            "step_title": "this is step_title1",
-            "thumbUpBy": "[]",
-            "time_created": 1656757217,
-            "time_modified": 1656757217,
-            "title": null
-        },
-        "2": {
-            "question_id": 1,
-            "author": 1,
-            "content": "this is a content in page2",
-            "id": 3,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": "[]",
-            "step_number": 2,
-            "step_title": "this is step_title2",
-            "thumbUpBy": "[]",
-            "time_created": 1656757217,
-            "time_modified": 1656757217,
-            "title": null
-        }
-    }
+    "token": "64c40499-5b21-4de6-85d1-a1416a7158b0",
+    "user_id": 3
 }
 
 
-4. like 
-curl --location --request PATCH '127.0.0.1:5000/question/1/thumb_up' \
---header 'user_id: 1' \
---header 'token: bc7dfcd7-282e-419f-9809-18dec22bfa30'
 
-curl --location --request PATCH '127.0.0.1:5000/question/1/thumb_up' \
---header 'user_id: 2' \
---header 'token: 8bec917f-f10d-460d-a7ba-ba6de50f3577'
-
-return 
+ 2. login
+ curl --location --request POST '127.0.0.1:5000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "1234567890@gmail.com",
+  "password": "123"
+}'
+return
 {
-    "question": {
-        "0": {
-            "question_id": null,
-            "author": 1,
-            "content": "this is a content in page 0",
-            "id": 1,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": [],
-            "step_number": 0,
-            "step_title": "this is step_title0",
-            "thumb_up_by": [
-                1,
-                2
-            ],
-            "time_created": 1656818607,
-            "time_modified": 1656818607,
-            "title": "this is a title"
-        },
-        "1": {
-            "question_id": 1,
-            "author": 1,
-            "content": "this is a content in page 1",
-            "id": 2,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": [],
-            "step_number": 1,
-            "step_title": "this is step_title1",
-            "thumb_up_by": [],
-            "time_created": 1656818607,
-            "time_modified": 1656818607,
-            "title": null
-        },
-        "2": {
-            "question_id": 1,
-            "author": 1,
-            "content": "this is a content in page2",
-            "id": 3,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": [],
-            "step_number": 2,
-            "step_title": "this is step_title2",
-            "thumb_up_by": [],
-            "time_created": 1656818607,
-            "time_modified": 1656818607,
-            "title": null
-        }
-    }
+    "token": "64c40499-5b21-4de6-85d1-a1416a7158b0",
+    "user_id": 3
 }
 
-5. un_thumb_up
-curl --location --request PATCH '127.0.0.1:5000/question/1/un_thumb_up' \
+
+3.   logout
+curl --location --request POST '127.0.0.1:5000/auth/logout'
+return
+{}
+
+
+4.
+curl --location --request GET '127.0.0.1:5000/auth/ping'
+return
+Pong
+
+5.
+
+
+
+
+
+Question
+
+1.
+curl --location --request GET '127.0.0.1:5000/question/ping'
+return Pong
+
+
+2.
+curl --location --request POST '127.0.0.1:5000/question' \
 --header 'user_id: 1' \
---header 'token: bc7dfcd7-282e-419f-9809-18dec22bfa30'
+--header 'Authorization: 64c40499-5b21-4de6-85d1-a1416a7158b0' \
+--data-raw ''
 
-{
-    "question": {
-        "0": {
-            "question_id": null,
-            "author": 1,
-            "content": "this is a content in page 0",
-            "id": 1,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": [],
-            "step_number": 0,
-            "step_title": "this is step_title0",
-            "thumb_up_by": [
-                2
-            ],
-            "time_created": 1656818607,
-            "time_modified": 1656818607,
-            "title": "this is a title"
-        },
-        "1": {
-            "question_id": 1,
-            "author": 1,
-            "content": "this is a content in page 1",
-            "id": 2,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": [],
-            "step_number": 1,
-            "step_title": "this is step_title1",
-            "thumb_up_by": [],
-            "time_created": 1656818607,
-            "time_modified": 1656818607,
-            "title": null
-        },
-        "2": {
-            "question_id": 1,
-            "author": 1,
-            "content": "this is a content in page2",
-            "id": 3,
-            "image": null,
-            "is_deleted": 0,
-            "reploy_ids": [],
-            "step_number": 2,
-            "step_title": "this is step_title2",
-            "thumb_up_by": [],
-            "time_created": 1656818607,
-            "time_modified": 1656818607,
-            "title": null
-        }
-    }
-}
+
+
+3.
+curl --location --request POST '127.0.0.1:5000/question' \
+--header 'token: 64c40499-5b21-4de6-85d1-a1416a7158b0' \
+--header 'user_id: 1' \
+--header 'Authorization: 64c40499-5b21-4de6-85d1-a1416a7158b0' \
+--data-raw ''
+
+return
+"Invalid access as token or user_id invalid."
+
+4.
+curl --location --request PATCH '127.0.0.1:5000/question/1/thumb_up' \
+--header 'token: 64c40499-5b21-4de6-85d1-a1416a7158b0'
+
+return
+"Invalid access, no token or user_id found."
+
+5.
+curl --location --request PATCH '127.0.0.1:5000/question/1/un_thumb_up'
+
+return
+"Invalid access, no token or user_id found."
