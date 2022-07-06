@@ -1,0 +1,86 @@
+  1  register:
+
+curl --location --request POST '127.0.0.1:5000/auth/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "1234567890@gmail.com",
+  "password": "123",
+  "name": "joe"
+}'
+
+return
+{
+    "token": "64c40499-5b21-4de6-85d1-a1416a7158b0",
+    "user_id": 3
+}
+
+
+
+ 2. login
+ curl --location --request POST '127.0.0.1:5000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "1234567890@gmail.com",
+  "password": "123"
+}'
+return
+{
+    "token": "64c40499-5b21-4de6-85d1-a1416a7158b0",
+    "user_id": 3
+}
+
+
+3.   logout
+curl --location --request POST '127.0.0.1:5000/auth/logout'
+return
+{}
+
+
+4.
+curl --location --request GET '127.0.0.1:5000/auth/ping'
+return
+Pong
+
+5.
+
+
+
+
+
+Question
+
+1.
+curl --location --request GET '127.0.0.1:5000/question/ping'
+return Pong
+
+
+2.
+curl --location --request POST '127.0.0.1:5000/question' \
+--header 'user_id: 1' \
+--header 'Authorization: 64c40499-5b21-4de6-85d1-a1416a7158b0' \
+--data-raw ''
+
+
+
+3.
+curl --location --request POST '127.0.0.1:5000/question' \
+--header 'token: 64c40499-5b21-4de6-85d1-a1416a7158b0' \
+--header 'user_id: 1' \
+--header 'Authorization: 64c40499-5b21-4de6-85d1-a1416a7158b0' \
+--data-raw ''
+
+return
+"Invalid access as token or user_id invalid."
+
+4.
+curl --location --request PATCH '127.0.0.1:5000/question/1/thumb_up' \
+--header 'token: 64c40499-5b21-4de6-85d1-a1416a7158b0'
+
+return
+"Invalid access, no token or user_id found."
+
+5.
+curl --location --request PATCH '127.0.0.1:5000/question/1/un_thumb_up'
+
+return
+"Invalid access, no token or user_id found."
