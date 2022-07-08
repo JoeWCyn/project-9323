@@ -31,7 +31,7 @@ def _question_title_create(data):
     step_number = 0
     step_title = data.get('step_title', None)
     title = data.get('title', None)
-    content = data.get('content', None)
+    content = json.dumps(data.get('content', None))
     image = None
     time_created = get_unix_time()
     time_modified = get_unix_time()
@@ -61,7 +61,7 @@ def _question_page_create(data, question_id, step_number):
     step_number = step_number
     step_title = data.get('step_title', None)
     title = None
-    content = data.get('content', None)
+    content = json.dumps(data.get('content', None))
     image = None
     time_created = get_unix_time()
     time_modified = get_unix_time()
