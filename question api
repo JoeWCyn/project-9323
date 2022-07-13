@@ -1,0 +1,120 @@
+curl --location --request POST '127.0.0.1:5000/auth/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "123@gmail.com",
+  "password": "456",
+  "name": "joe"
+}'
+{
+    "token": "e2e8540f-8a00-4f21-9484-cf0f97faff1d",
+    "user_id": 1
+}
+
+
+
+
+curl --location --request POST '127.0.0.1:5000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "123@gmail.com",
+  "password": "456"
+}'
+{
+    "token": "e2e8540f-8a00-4f21-9484-cf0f97faff1d",
+    "user_id": 1
+}
+
+
+
+question
+1.
+curl --location --request POST '127.0.0.1:5000/questions/add' \
+--header 'user_id: 1' \
+--header 'token: e2e8540f-8a00-4f21-9484-cf0f97faff1d' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "new title",
+    "content": "new content"
+
+}'
+{
+    "question_id": 1
+}
+
+
+2.
+
+Exit
+curl --location --request GET '127.0.0.1:5000/questions/1' \
+--header 'user_id: 1' \
+--header 'token: e2e8540f-8a00-4f21-9484-cf0f97faff1d'
+{
+    "question": [
+        1,
+        "new title",
+        "new content",
+        1657692570,
+        1657692570,
+        1,
+        "[]",
+        "[]",
+        0
+    ]
+}
+
+
+Not exit
+curl --location --request GET '127.0.0.1:5000/questions/2' \
+--header 'user_id: 1' \
+--header 'token: e2e8540f-8a00-4f21-9484-cf0f97faff1d'
+{
+    "error": "Question not found with question_id = 2"
+}
+
+
+
+3.
+curl --location --request PATCH '127.0.0.1:5000/questions/1/like' \
+--header 'user_id: 1' \
+--header 'token: e2e8540f-8a00-4f21-9484-cf0f97faff1d'
+{
+    "question": [
+        1,
+        "new title",
+        "new content",
+        1657692570,
+        1657692570,
+        1,
+        "[]",
+        "[1]",
+        0
+    ]
+}
+
+
+4.
+curl --location --request PATCH '127.0.0.1:5000/questions/1/dislike' \
+--header 'user_id: 1' \
+--header 'token: e2e8540f-8a00-4f21-9484-cf0f97faff1d'
+{
+    "question": [
+        1,
+        "new title",
+        "new content",
+        1657692570,
+        1657692570,
+        1,
+        "[]",
+        "[]",
+        0
+    ]
+}
+
+
+5.
+curl --location --request DELETE '127.0.0.1:5000/questions/1' \
+--header 'user_id: 1' \
+--header 'token: e2e8540f-8a00-4f21-9484-cf0f97faff1d'
+{
+    "question_id": 1
+}
