@@ -70,6 +70,14 @@ def update_score(user_id):
     cur.execute(sql)
     con.commit()
 
+def get_user_id_by_question(question_id):
+    con = sqlite3.connect(DATABASE_NAME)
+    cur = con.cursor()
+    sql = "SELECT author from questions where id = {} ".format(question_id)
+    rows = cur.execute(sql).fetchall()
+    user_id = rows[0][0]
+    return user_id
+
 # delete all the title and pages information
 @question_page.route('/questions/<int:question_id>', methods=['DELETE'])
 @authenticated
@@ -128,7 +136,8 @@ def question_like_patch(question_id):
 
     cur.execute(sql)
     con.commit()
-
+    liked_user_id = get_user_id_by_question(question_id)
+    update_score(liked_user_id)
     return question_get_by_id(question_id)
 
 
