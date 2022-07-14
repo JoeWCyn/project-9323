@@ -1,0 +1,100 @@
+score
+
+curl --location --request POST '127.0.0.1:5000/auth/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "789@gmail.com",
+  "password": "456",
+  "name": "joe"
+}'
+
+{
+    "token": "d9275c72-7c50-46cb-a02d-5e7754bb22c5",
+    "user_id": 3
+}
+
+
+
+
+curl --location --request POST '127.0.0.1:5000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "789@gmail.com",
+  "password": "456"
+}'
+
+{
+    "token": "d9275c72-7c50-46cb-a02d-5e7754bb22c5",
+    "user_id": 3
+}
+
+
+
+
+curl --location --request GET '127.0.0.1:5000/become_expert' \
+--header 'user_id: 3' \
+--header 'token: d9275c72-7c50-46cb-a02d-5e7754bb22c5'
+{
+    "expertOrNot": "1",
+    "users": 3
+}
+curl --location --request GET '127.0.0.1:5000/expert_require_public' \
+--header 'user_id: 3' \
+--header 'token: d9275c72-7c50-46cb-a02d-5e7754bb22c5'
+
+
+
+curl --location --request POST '127.0.0.1:5000/questions/add' \
+--header 'user_id: 3' \
+--header 'token: d9275c72-7c50-46cb-a02d-5e7754bb22c5' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "123",
+    "content": "4567"
+
+}'
+{
+    "question_id": 23
+}
+
+
+
+
+curl --location --request GET '127.0.0.1:5000/expert_require_not_public' \
+--header 'user_id: 3' \
+--header 'token: d9275c72-7c50-46cb-a02d-5e7754bb22c5'
+{
+    "isPpublic": "1",
+    "users": 3
+}
+
+
+
+curl --location --request POST '127.0.0.1:5000/auth/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "2019@ucla.com",
+  "password": "2020",
+  "name": "burg"
+}'
+{
+    "token": "8763a4fc-cd4e-4f81-a96a-c00f90d7a31c",
+    "user_id": 4
+}
+curl --location --request POST '127.0.0.1:5000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "2019@ucla.com",
+  "password": "2020"
+}'
+
+
+
+curl --location --request GET '127.0.0.1:5000/become_expert' \
+--header 'user_id: 4' \
+--header 'token: 8763a4fc-cd4e-4f81-a96a-c00f90d7a31c'
+{
+    "expertOrNot": "0",
+    "msg": "score not enough",
+    "users": 4
+}
