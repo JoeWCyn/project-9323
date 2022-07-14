@@ -172,7 +172,7 @@ def question_dislike_patch(question_id):
 
     return question_get_by_id(question_id)
 
-    
+# ping    
 @question_page.route('/question/ping', methods=['GET'])
 def question_ping():
     return "Pong", 200
